@@ -1,17 +1,28 @@
 body{
 
-    font-size: 16px;
     position: relative;
-    font-weight:400;
+    margin:0;
 }
 h6{
     font-family: 'Ranchers', cursive;
     text-align: center;
     margin:0;
     font-size: 65px;
+    margin-bottom: 50px;
 }
 
 .btn-primary
 {
     margin-bottom: 15px !important;
+}
+.total
+{
+     
+    margin-left:800px;
+    margin-bottom: 15px !important;
+    align-items: flex-end !important;
+}
+
+table,th{
+    text-align: center;
 }
