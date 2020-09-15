@@ -1,20 +1,25 @@
 
 var total=0.0;
-
+var labels=[];
+var amountData=[];
 function restoreFromLocalStorage(){
-    console.log("restore function called")
-    try{
+    console.log("restore function called");
     var data=JSON.parse(localStorage.getItem("data"));
+    if(data!=null){
     for(var i=0;i<data.length;i++){
         var row=createRow(data[i][0],data[i][1],data[i][2],data[i][3]);
+        amountData.push(data[i][1]);
+        labels.push(data[i][3]);
         var table_body=document.getElementById("table_body");
         table_body.appendChild(row);
         total=total+parseFloat(data[i][1]);
+        }
+        createChart();
     }
-}
-catch{
+    else{
+    console.log("local storage is empty");
     localStorage.setItem("data",JSON.stringify([]));
-}
+    }
     document.getElementById("total").placeholder=total;
 
 }
@@ -64,14 +69,44 @@ function createRow(inputDescription,inputAmount,inputDate,inputSpendby){
     
 
 }
+function random_bg_color(range) {
+    var color=[]
+    for(var i=0;i<range;i++){
+    var x = Math.floor(Math.random() * 256);
+    var y = Math.floor(Math.random() * 256);
+    var z = Math.floor(Math.random() * 256);
+    color.push("rgb(" + x + "," + y + "," + z + ")");
+    }
+    return color;
+}
+function createChart(){
+    console.log("in create chart");
+    var plot=new Chart(document.getElementById("pie-chart"),
+    {
+        type:'pie',
+        data:{
+            labels:labels,
+            datasets:[{
+                label:"Expenses",
+                backgroundColor:random_bg_color(amountData.length),
+                borderColor:'rgb(255,99,132)',
+                data:amountData
+            }]
+        }
+
+    })
+}
 
 function addRow(e){
     
     console.log("add row functiona");
     var inputDescription = document.getElementById("Exp_Desp").value;
+    
     var inputAmount = document.getElementById("Exp_Amount").value;
+    amountData.push(inputAmount)
     var inputDate = document.getElementById("Exp_date").value;
     var inputSpendby = document.getElementById("Exp_spend").value;
+    labels.push(inputSpendby);
     var table_body=document.getElementById("table_body");
     console.log(inputDescription,inputAmount,inputDate,inputSpendby);
     var row=createRow(inputDescription,inputAmount,inputDate,inputSpendby);
@@ -81,5 +116,8 @@ function addRow(e){
     var data=JSON.parse(localStorage.getItem("data"));
     data.push([inputDescription,inputAmount,inputDate,inputSpendby]);
     localStorage.setItem("data",JSON.stringify(data));
+    createChart();
    
 }
+
+ 

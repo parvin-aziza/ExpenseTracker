@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Expense Tracker</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap-4.5.0-dist/bootstrap-4.5.0-dist/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="bootstrap-4.5.0-dist/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
@@ -8,6 +9,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
         <link  rel="stylesheet" href="expenses.css">
        <script src="expenceTracker.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+      
     </head> 
     
     <body onload="restoreFromLocalStorage()">
@@ -79,9 +82,11 @@
             
             </div>  
             
-            <div class="col-lg text-center">
+            <div class="col-lg text-center" id="right_col">
                 <input type="text" placeholder="0.0" id="total" disabled/> Total
+              <div class="chart-container">  
                 <canvas id="pie-chart" width="800" height="450"></canvas>
+            </div> 
             </div> 
 
 
