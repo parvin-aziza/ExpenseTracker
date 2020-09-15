@@ -15,7 +15,7 @@
                 <h6> Expense Tracker</h6>
                 <div class="col">
                    
-
+                
                     <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -29,41 +29,41 @@
                         <div class="modal-body mx-3">
                           <div class="md-form mb-5">
                             <label data-error="wrong" data-success="right" for="form34">Description</label>
-                            <input type="text" id="form34" class="form-control validate">
+                            <input type="text" id="Exp_Desp" class="form-control validate">
                             
                           </div>
                   
                           <div class="md-form mb-5">
                             <label data-error="wrong" data-success="right" for="form29">Amount</label>
-                            <input type="email" id="form29" class="form-control validate">
+                            <input type="number" id="Exp_Amount" class="form-control validate">
                             
                           </div>
                   
                           <div class="md-form mb-5">
                             <label data-error="wrong" data-success="right" for="form32">Date</label>
-                            <input type="date" id="form32" class="form-control validate">
+                            <input type="date" id="Exp_date" class="form-control validate">
                             
                           </div>
                   
                           <div class="md-form mb-5">
-                            <label data-error="wrong" data-success="right" for="form32">Spent by </label>
-                            <input type="text" id="form32" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form32">Spend by </label>
+                            <input type="text" id="Exp_spend" class="form-control validate">
                             
                           </div>
                   
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
-                          <button class="btn btn-primary">Submit<i class="fas fa-paper-plane-o ml-1"></i></button>
+                          <button class="btn btn-primary" id="Exp_submit">Submit</button>
                         </div>
                       </div>
                     </div>
                   </div>
                   
                   
-                    <a href="" class="btn btn-primary " data-toggle="modal" data-target="#modalContactForm">Add New Expenses</a>
+                <a href="" class="btn btn-primary " data-toggle="modal" data-target="#modalContactForm">Add New Expenses</a>
                   
  
-                <input type="text" class="total"> <b>Total</b></input>
+                <input type="text" class="total" placeholder="0.0"> <b>Total</b></input>
                 </div>
                 <div class="table-responsive">
                 <table class="table table-bordered">
@@ -74,23 +74,24 @@
                         <th scope="col">Amount</th>
                         <th scope="col">Date</th>
                         <th scope="col">Spend By</th>
-                        <th scope="col">Action Items</th>
+                        <th scope="col" >Action Items</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tabel_body">
+                    
                     <tr>
                         <th scope="row">1</th>
                         <td>shopping</td>
                         <td>1000</td>
                         <td>Sep 2020</td>
                         <td>Aziza</td>
-                        <td><button>Delete</button></td>
+                        <td id="delete"><button>Delete</button></td>
                     </tr>
                 </tbody>
                 </table>
             </div>
             </div>
         </div>
-
+  <script src="expenceTracker.js"></script>
     </body>
 </html>

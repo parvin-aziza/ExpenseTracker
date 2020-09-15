@@ -26,3 +26,12 @@ h6{
 table,th{
     text-align: center;
 }
+
+td:hover{
+    background-color:skyblue;
+}
+
+#delete
+{
+    pointer-events: none;
+}
