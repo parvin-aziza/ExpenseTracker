@@ -1,4 +1,7 @@
+body{
 
+    background-color: whitesmoke;
+}
 
 
 
@@ -15,12 +18,23 @@ h6{
 {
     margin-bottom: 1px !important;
 }
+
+b{
+    font-weight: bolder;
+    font-size: x-large;
+}
 #total
 {
-     
+    margin-left: 3%; 
     text-align: center;
-    margin:0;
+    height: 10%;
     margin-top: 100px !important;
+    background-color:lightcyan;
+    font-weight: bold;
+    border-color: black;
+    margin-bottom: 10%;
+    border: 1px solid;
+    box-shadow: 5px 10px 8px 10px #888888;
     
 }
 
@@ -29,17 +43,17 @@ table,th{
     
 }
 
+th{
+    color: White;
+    background-color: black;
+}
+ td{
+     background-color:peachpuff;
+     font-weight: bold;
+     font-size: medium;
+ }
 
 td:hover{
     background-color:skyblue;
 }
 
-.col-lg
-{
-    height:auto;
-}
-#right_col
-{
-   background-color: wheat;
-   
-}

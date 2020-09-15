@@ -1,10 +1,14 @@
-
+//placeholder to store the total amount.
 var total=0.0;
+//placeholder to store the expense for a users used in pie chart.
 var labels=[];
+//placeholder to store the expense amount used in pie chart.
 var amountData=[];
+
+//function to restore data from loca storage and create pie chart if data exists.
 function restoreFromLocalStorage(){
     console.log("restore function called");
-    var data=JSON.parse(localStorage.getItem("data"));
+    var data=JSON.parse(localStorage.getItem("data")); 
     if(data!=null){
     for(var i=0;i<data.length;i++){
         var row=createRow(data[i][0],data[i][1],data[i][2],data[i][3]);
@@ -23,42 +27,18 @@ function restoreFromLocalStorage(){
     document.getElementById("total").placeholder=total;
 
 }
-function modifyCell(context){
-    var newData=document.getElementById("newValue");
-    // context.innerHTML=newData.value;
-    context.innerHTML="#####";
-    var model=document.getElementById("editCellModel");
-    model.style.display="none";
-}
-function editCell(){
-    var model=document.getElementById("editCellModel");
-    model.style.display="block";
-    var p=document.createElement("p");
-    p.innerHTML=this.innerHTML;
-    model.appendChild(p);
-    var input=document.createElement("input");
-    input.type=this.id;
-    input.id="newValue";
-    model.appendChild(input)
-    var button=document.createElement("button");
-    button.innerHTML="edit";
-    button.onclick=function(){
-        var newData=document.getElementById("newValue");
-    // context.innerHTML=newData.value;
-    this.innerHTML=newData.value;
-    var model=document.getElementById("editCellModel");
-    model.style.display="none";
-    }
-    model.appendChild(button);
 
-}
+
+//function to create cell of the table
 function createCell(data,id){
     var cell=document.createElement("td");
     cell.innerHTML=data;
     cell.id=id;
-    cell.addEventListener("click",editCell);
     return cell
 }
+
+
+//function to create row 
 function createRow(inputDescription,inputAmount,inputDate,inputSpendby){
     var row=document.createElement("tr");
     row.appendChild(createCell(inputDescription,"text"));
@@ -67,8 +47,9 @@ function createRow(inputDescription,inputAmount,inputDate,inputSpendby){
     row.appendChild(createCell(inputSpendby,"text"));
     return row;
     
-
 }
+
+//function to generate colors randomly for pie chart
 function random_bg_color(range) {
     var color=[]
     for(var i=0;i<range;i++){
@@ -79,6 +60,8 @@ function random_bg_color(range) {
     }
     return color;
 }
+
+//function to create chart and update chart when new entried are added.
 function createChart(){
     console.log("in create chart");
     var plot=new Chart(document.getElementById("pie-chart"),
@@ -97,18 +80,22 @@ function createChart(){
     })
 }
 
+//function to add row when user enters new expense
 function addRow(e){
     
     console.log("add row functiona");
     var inputDescription = document.getElementById("Exp_Desp").value;
     
     var inputAmount = document.getElementById("Exp_Amount").value;
-    amountData.push(inputAmount)
+    amountData.push(inputAmount);
+
     var inputDate = document.getElementById("Exp_date").value;
+
     var inputSpendby = document.getElementById("Exp_spend").value;
     labels.push(inputSpendby);
+
     var table_body=document.getElementById("table_body");
-    console.log(inputDescription,inputAmount,inputDate,inputSpendby);
+
     var row=createRow(inputDescription,inputAmount,inputDate,inputSpendby);
     table_body.appendChild(row);
     total=total+parseFloat(inputAmount);
