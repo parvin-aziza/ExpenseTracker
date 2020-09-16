@@ -27,8 +27,82 @@ function restoreFromLocalStorage(){
     document.getElementById("total").placeholder=total;
 
 }
+function refreshData(newDesp,newAmt,newDate,newSpend){
+
+    var data=JSON.parse(localStorage.getItem("data"));
+    data.push([newDesp,newAmt,newDate,newSpend]);
+    localStorage.setItem("data",JSON.stringify(data));
+    total=0.0;
+    labels=[];
+    amountData=[];
+    for(var i=0;i<data.length;i++){
+        amountData.push(data[i][1]);
+        labels.push(data[i][3]);
+        total=total+parseFloat(data[i][1]);
+        }
+        createChart();
+
+        document.getElementById("total").placeholder=total;
+}
+function deleteAndInsert(parent,index){
+    console.log("delete and Insert");
+    var table_body=document.getElementById("table_body");
+    console.log(parent.parentNode);
+    console.log(parent);
+    table_body.removeChild(parent);
+    
+    newDesp=document.getElementById("Edit_Desp").value;
+    newAmt=parseFloat(document.getElementById("Edit_Amount").value);
+    newDate=document.getElementById("Edit_date").value;
+    newSpend=document.getElementById("Edit_spend").value;
+    console.log(newDesp,newAmt,newDate,newSpend);
+    var data=JSON.parse(localStorage.getItem("data"));
+    data.splice(index,1);
+    localStorage.setItem("data",JSON.stringify(data));
+    var row=createRow(newDesp,newAmt,newDate,newSpend);
+    
+    table_body.appendChild(row);
+    
+    refreshData(newDesp,newAmt,newDate,newSpend);
+
+    var editModel=document.getElementById("editModal");
+    editModel.style.display="none";
+
+}
+function seaerchInLocalStorage(oldDesp,oldAmount,oldDate,oldSpend){
+    console.log("search index");
+    var data=JSON.parse(localStorage.getItem("data"));
+    for(var i=0;i<data.length;i++){
+        if(data[i][0]==oldDesp && data[i][1]==oldAmount && data[i][2]==oldDate && data[i][3]==oldSpend){
+            return i;
+        }
+    }
+
+}
+function editRow(){
+    var context=this;
+    console.log("edit Row");
+    var parent=this.parentNode;
+    var oldDesp=parent.children[0].innerHTML;
+    var oldAmount=parent.children[1].innerHTML
+    var oldDate=parent.children[2].innerHTML;
+    var oldSpend=parent.children[3].innerHTML;
+    
+    document.getElementById("Edit_Desp").value=oldDesp;
+    document.getElementById("Edit_Amount").value=oldAmount;
+    document.getElementById("Edit_date").value=oldDate;
+    document.getElementById("Edit_spend").value=oldSpend;
+    var index=seaerchInLocalStorage(oldDesp,oldAmount,oldDate,oldSpend);
+    document.getElementById("Edit_submit").addEventListener("click",function(){
+        deleteAndInsert(parent,index);
+    })
+    var editModel=document.getElementById("editModal");
+    editModel.style.display="block";
 
 
+
+
+}
 //function to create cell of the table
 function createCell(data,id){
     var cell=document.createElement("td");
@@ -45,6 +119,14 @@ function createRow(inputDescription,inputAmount,inputDate,inputSpendby){
     row.appendChild(createCell(inputAmount,"number"));
     row.appendChild(createCell(inputDate,"date"));
     row.appendChild(createCell(inputSpendby,"text"));
+    var link=document.createElement("a");
+   
+    var button = document.createElement("button");
+    button.innerHTML = "Edit";
+    button.addEventListener("click",editRow);
+    row.appendChild(button);
+    
+
     return row;
     
 }
