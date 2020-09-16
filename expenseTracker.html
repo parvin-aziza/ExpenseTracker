@@ -37,7 +37,6 @@
         </div>
 
         <div class="md-form mb-5">
-          
             <label>Amount</label>
             <input type="number" id="Exp_Amount" class="form-control validate">
         </div>
@@ -79,9 +78,8 @@
                         </tbody>
                 </table>
             </div>
-            
-            </div>  
-            
+
+            </div>   
             <div class="col-lg text-center" id="right_col">
               <b>Your Expenses</b>
                 <input type="text" placeholder="0.0" id="total" disabled/> 
@@ -92,9 +90,45 @@
             </div> 
 
 
+
+
+
+
+            
+              <div id="editModal" style="display:none">
+              <label >Description</label>
+            <input type="text" id="Edit_Desp" class="form-control validate">
+         
+        
+        
+            <label>Amount</label>
+            <input type="number" id="Edit_Amount" class="form-control validate">
+        
+
+        
+            <label >Date</label>
+            <input type="date" id="Edit_date" class="form-control validate">
+        
+
+        
+            <label >Spend by </label>
+            <input type="text" id="Edit_spend" class="form-control validate">
+
+            <button class="btn btn-primary" id="Edit_submit" data-dismiss="modal" >Submit</button>
+              </div>
+             
+    
+
+
+
+
+
+
+
+
             </div>
            </div> 
-        
+
     </body> 
 
 </html>
