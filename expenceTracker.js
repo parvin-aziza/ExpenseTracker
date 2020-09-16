@@ -5,6 +5,8 @@ var labels=[];
 //placeholder to store the expense amount used in pie chart.
 var amountData=[];
 
+
+
 //function to restore data from loca storage and create pie chart if data exists.
 function restoreFromLocalStorage(){
     console.log("restore function called");
@@ -27,6 +29,8 @@ function restoreFromLocalStorage(){
     document.getElementById("total").placeholder=total;
 
 }
+
+//While Editing to clear the old data from loal strorage
 function refreshData(newDesp,newAmt,newDate,newSpend){
 
     var data=JSON.parse(localStorage.getItem("data"));
@@ -44,6 +48,8 @@ function refreshData(newDesp,newAmt,newDate,newSpend){
 
         document.getElementById("total").placeholder=total;
 }
+
+//Insert updated data into row
 function deleteAndInsert(parent,index){
     console.log("delete and Insert");
     var table_body=document.getElementById("table_body");
@@ -65,10 +71,14 @@ function deleteAndInsert(parent,index){
     
     refreshData(newDesp,newAmt,newDate,newSpend);
 
-    var editModel=document.getElementById("editModal");
-    editModel.style.display="none";
+    //var editModel=document.getElementById("editModal");
+    //editModel.style.display="none";
+    var modal = document.getElementById("modalEdit");
+    modal.style.display = "none";
 
 }
+
+//Search the data on local storage
 function seaerchInLocalStorage(oldDesp,oldAmount,oldDate,oldSpend){
     console.log("search index");
     var data=JSON.parse(localStorage.getItem("data"));
@@ -79,9 +89,14 @@ function seaerchInLocalStorage(oldDesp,oldAmount,oldDate,oldSpend){
     }
 
 }
+
+
 function editRow(){
     var context=this;
     console.log("edit Row");
+    
+    
+    
     var parent=this.parentNode;
     var oldDesp=parent.children[0].innerHTML;
     var oldAmount=parent.children[1].innerHTML
@@ -99,10 +114,8 @@ function editRow(){
     var editModel=document.getElementById("editModal");
     editModel.style.display="block";
 
-
-
-
 }
+
 //function to create cell of the table
 function createCell(data,id){
     var cell=document.createElement("td");
@@ -119,14 +132,15 @@ function createRow(inputDescription,inputAmount,inputDate,inputSpendby){
     row.appendChild(createCell(inputAmount,"number"));
     row.appendChild(createCell(inputDate,"date"));
     row.appendChild(createCell(inputSpendby,"text"));
-    var link=document.createElement("a");
-   
-    var button = document.createElement("button");
-    button.innerHTML = "Edit";
-    button.addEventListener("click",editRow);
-    row.appendChild(button);
-    
-
+      
+    var a=document.createElement("a");
+    a.setAttribute("href","");
+    a.setAttribute("class","btn btn-info mb-4");
+    a.setAttribute("data-toggle","modal");
+    a.setAttribute("data-target","#modalEdit");
+    a.addEventListener('click',editRow);
+    a.innerHTML="Edit";
+    row.appendChild(a);
     return row;
     
 }
