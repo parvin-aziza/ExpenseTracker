@@ -27,6 +27,7 @@ function restoreFromLocalStorage(){
     document.getElementById("total").placeholder=total;
 
 }
+
 function refreshData(newDesp,newAmt,newDate,newSpend){
 
     var data=JSON.parse(localStorage.getItem("data"));
@@ -126,6 +127,7 @@ function createRow(inputDescription,inputAmount,inputDate,inputSpendby){
     button.addEventListener("click",editRow);
     row.appendChild(button);
     
+
 
     return row;
     
