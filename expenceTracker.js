@@ -30,7 +30,9 @@ function restoreFromLocalStorage(){
 
 }
 
+
 //While Editing to clear the old data from loal strorage
+
 function refreshData(newDesp,newAmt,newDate,newSpend){
 
     var data=JSON.parse(localStorage.getItem("data"));
@@ -132,7 +134,6 @@ function createRow(inputDescription,inputAmount,inputDate,inputSpendby){
     row.appendChild(createCell(inputAmount,"number"));
     row.appendChild(createCell(inputDate,"date"));
     row.appendChild(createCell(inputSpendby,"text"));
-      
     var a=document.createElement("a");
     a.setAttribute("href","");
     a.setAttribute("class","btn btn-info mb-4");
