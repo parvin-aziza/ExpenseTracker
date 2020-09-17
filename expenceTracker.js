@@ -5,7 +5,75 @@ var labels=[];
 //placeholder to store the expense amount used in pie chart.
 var amountData=[];
 
+function sortByName(){
+    sortAndDisplay(3);
+    
+}
+function sortByAmount(){
+    sortAndDisplay(1);
+}
 
+function sortAndDisplay(field){
+    var table,rows,switching,i,x,y,shouldSwitch;
+    table=document.getElementById("table_body");
+    switching=true;
+    while(switching){
+        switching=false;
+        rows=table.rows;
+        for(i=0;i<(rows.length-1);i++){
+            shouldSwitch=false;
+            x=rows[i].getElementsByTagName("td")[field];
+            y=rows[i+1].getElementsByTagName("td")[field];
+            if(field!=1){
+            if(x.innerHTML.toLowerCase>y.innerHTML.toLowerCase()){
+                shouldSwitch=true;
+                break;
+                }
+            }
+            else{
+                if(parseFloat(x.innerHTML)>parseFloat(y.innerHTML)){
+                    shouldSwitch=true;
+                    break;
+                    }
+            }
+        }
+        if(shouldSwitch){
+            rows[i].parentNode.insertBefore(rows[i+1],rows[i]);
+            switching=true;
+        }
+    }
+    
+}
+
+
+function filterValues()
+{   
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("filter");
+    var data=JSON.parse(localStorage.getItem("data")); 
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table_body");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[3];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          
+          
+        } else {
+          tr[i].style.display = "none";
+        }
+       
+      }  
+     
+    }
+    
+
+   
+    
+}
 
 //function to restore data from loca storage and create pie chart if data exists.
 function restoreFromLocalStorage(){
